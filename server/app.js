@@ -5,6 +5,7 @@ require('./services/passport')
 const cookieSession =require('cookie-session')
 const authRoutes=require('./routes/auth')
 const app=express()
+const path = require("path")
 const PORT = 5000
 const connectDB = require("./database/db")
 const passport = require('passport')
