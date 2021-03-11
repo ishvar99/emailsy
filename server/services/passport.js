@@ -4,10 +4,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User=require("../models/user")
 let url =
 process.env.NODE_ENV === "production"
-  ? `${req.protocol}://${req.get(
-      "host"
-    )}/auth/google/callback`
-  : `${req.protocol}://localhost:/auth/google/callback`
+  ? "https://emailsy.herokuapp.com/auth/google/callback"
+  : "http://localhost:3000/auth/google/callback"
 passport.serializeUser((user,done)=>{
  done(null,user._id);
 })
