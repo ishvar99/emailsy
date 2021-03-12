@@ -3,5 +3,13 @@ exports.currentUser=(req,res)=>{
 }
 exports.logoutUser=(req,res)=>{
  req.logout();
- res.json({success:true})
+ res.redirect('/')
+}
+exports.handleCallback=(req,res)=>{
+ res.redirect(
+        process.env.NODE_ENV === "production"
+          ? `${req.protocol}://${req.get(
+              "host"
+            )}/surveys`
+          : `${req.protocol}://localhost:3000/surveys`)
 }
