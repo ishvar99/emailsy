@@ -27,12 +27,10 @@ async (accessToken,refreshToken,profile,done)=>{
  try{
  const foundUser= await User.findOne({googleId:profile.id})
  if(foundUser){
-  done(null,foundUser)
+  return done(null,foundUser)
  }
- else{
   const user =await User.create({googleId:profile.id})
   done(null,user)
- }
 }catch(err){
  console.log(err)
 }
