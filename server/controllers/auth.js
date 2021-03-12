@@ -3,4 +3,5 @@ exports.currentUser=(req,res)=>{
 }
 exports.logoutUser=(req,res)=>{
  req.logout();
+ res.json({success:true})
 }
