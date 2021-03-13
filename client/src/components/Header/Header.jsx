@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {FetchUser} from '../../redux/actions/authAction'
+import Payment from '../Payment/Payment'
 const Header = () => {
  const auth = useSelector((state) => state.auth)
  const dispatch = useDispatch()
@@ -12,7 +13,10 @@ const Header = () => {
     case false:
      return <li><a href="/api/auth/google">Login With Google</a></li>
      default:
-      return <li><a href="/api/auth/google/logout">Logout</a></li>
+      return [
+        <li><Payment/></li>,
+      <li><a href="/api/auth/google/logout">Logout</a></li>
+    ]
   }
  }
  useEffect(() => {
