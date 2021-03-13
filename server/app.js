@@ -4,6 +4,7 @@ const keys =require('./config/keys')
 require('./services/passport')
 const cookieSession =require('cookie-session')
 const authRoutes=require('./routes/auth')
+const paymentRoutes=require('./routes/payment')
 const app=express()
 const path = require("path")
 const PORT = 5000
@@ -11,6 +12,7 @@ const connectDB = require("./database/db")
 const passport = require('passport')
 //connect to database
 connectDB()
+app.use(express.json())
 app.use(cookieSession({
  maxAge:30 * 24 * 60 * 60 * 1000,
  keys:[keys.CookieKey]
@@ -18,6 +20,7 @@ app.use(cookieSession({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use('/api/auth/google',authRoutes);
+app.use('/api/stripe',paymentRoutes)
 if (process.env.NODE_ENV === "production") {
  app.use(express.static(path.join(__dirname, "../client", "build")))
  app.get("*", (req, res) => {
