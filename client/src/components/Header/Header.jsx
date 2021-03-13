@@ -21,7 +21,7 @@ const Header = () => {
  return (
     <nav>
     <div className="nav-wrapper">
-      <Link to="/" className="left p-2 brand-logo">Emailsy</Link>
+      <Link to={auth?'/surveys':'/'} className="left p-2 brand-logo">Emailsy</Link>
       <ul className="right">
         {renderContent()}
       </ul>
