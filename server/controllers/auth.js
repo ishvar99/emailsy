@@ -1,3 +1,6 @@
+const keys=require('../config/keys')
+const stripe=require('stripe')(keys.StripeSecretKey)
+
 exports.currentUser=(req,res)=>{
  res.send(req.user)
 }
