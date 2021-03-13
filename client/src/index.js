@@ -10,3 +10,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+console.log('STRIPE KEY', process.env.REACT_APP_STRIPE_KEY);
