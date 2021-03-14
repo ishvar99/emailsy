@@ -11,12 +11,14 @@ exports.createSurvey= async(req,res)=>{
   body,
   subject,
   recipients:recipients.split(",").map((email)=>({email})),
-  // user:req.user.id,
+  user:req.user.id,
   dateSent:Date.now()
  })
  try{
  await sendEmail(survey)
- return res.status(200).json({success:true,message:'Email send successfully'})
+ req.user.credits-=1;
+ const user= await req.user.save();
+ return res.status(200).json(user)
  }catch(err){
   return res.status(400).json({success:false,message:'Failed to send email'})
  }
