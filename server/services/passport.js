@@ -20,6 +20,7 @@ passport.use(new GoogleStrategy({
  proxy:true //to allow google to trust proxy
 },
 async (accessToken,refreshToken,profile,done)=>{
+  console.log(accessToken);
  try{
  const foundUser= await User.findOne({googleId:profile.id})
  if(foundUser){

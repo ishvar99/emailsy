@@ -11,6 +11,7 @@ const passport = require('passport')
 const authRoutes=require('./routes/auth')
 const paymentRoutes=require('./routes/payment')
 const surveyRoutes=require('./routes/survey')
+const helpers= require('./services/sendEmail')
 //connect to database
 connectDB()
 app.use(express.json())
