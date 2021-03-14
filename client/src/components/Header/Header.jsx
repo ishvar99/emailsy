@@ -15,7 +15,8 @@ const Header = () => {
      default:
       return [
         <li key="1"><Payment/></li>,
-      <li key="2"><a href="/api/auth/google/logout">Logout</a></li>
+        <li key="2" style={{margin:"0 10px"}}>Credits: {auth?.credits}</li>,
+      <li key="3"><a href="/api/auth/google/logout">Logout</a></li>
     ]
   }
  }

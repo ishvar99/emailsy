@@ -7,8 +7,9 @@ const Payment = () => {
  return (
   <StripeCheckout
    name={"Emaisy"}
-   description={"Buy credits worth $5"}
-   amount={500}
+   description={"Buy credits worth ₹500"}
+   currency="INR"
+   amount={50000}
    token={(token)=>dispatch(handleToken(token))}  //stripe verify token first
    stripeKey={process.env.REACT_APP_STRIPE_KEY}
   >
