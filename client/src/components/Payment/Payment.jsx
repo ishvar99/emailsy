@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux'
 import React from 'react'
 import {handleToken} from '../../redux/actions/authAction'
 const Payment = () => {
+ console.log(process.env.REACT_APP_STRIPE_KEY);
  const dispatch = useDispatch()
  return (
   <StripeCheckout
