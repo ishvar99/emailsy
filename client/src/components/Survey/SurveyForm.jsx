@@ -3,7 +3,8 @@ import {reduxForm,Field} from 'redux-form'
 import SurveyField from './SurveyField'
 import {Link} from 'react-router-dom'
 import emailValidation from '../../utils/emailValidation'
-const SurveyForm = () => {
+const SurveyForm = ({surveyReview}) => {
+  
  return (
   <div>
     <form onSubmit={(e)=>{
@@ -39,7 +40,7 @@ const SurveyForm = () => {
       <Link to="/surveys" className="red btn-flat white-text">
         Cancel
       </Link>
-        <button type="submit" className="teal btn-flat right white-text">
+        <button onClick={()=>surveyReview(true)} type="submit" className="teal btn-flat right white-text">
           Submit
           <i className="material-icons right">done</i>
         </button>
