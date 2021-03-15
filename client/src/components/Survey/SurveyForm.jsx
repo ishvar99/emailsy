@@ -2,6 +2,7 @@ import React from 'react'
 import {reduxForm,Field} from 'redux-form'
 import SurveyField from './SurveyField'
 import {Link} from 'react-router-dom'
+import emailValidation from '../../utils/emailValidation'
 const SurveyForm = () => {
  return (
   <div>
@@ -31,7 +32,7 @@ const SurveyForm = () => {
       <Field
         name="recipients"
         type="text"
-        label="Recipients List"
+        label="Recipients List (comma seperated)"
         component={SurveyField}
       />
       <div>
@@ -49,6 +50,7 @@ const SurveyForm = () => {
 }
 const validate=(values)=>{
   const errors={}
+  errors.recipients=emailValidation(values.recipients|| "")
   if(!values.title){
     errors.title="You must provide a title"
   }
@@ -57,6 +59,9 @@ const validate=(values)=>{
   }
   if(!values.body){
     errors.body="You must provide a body"
+  }
+  if(!values.recipients){
+    errors.recipients="You must provide recipients"
   }
   return errors;
 }
