@@ -7,5 +7,7 @@ module.exports={
  StripeSecretKey:process.env.STRIPE_SECRET_KEY,
  SendGridKey:process.env.SENDGRID_API_KEY,
  SendGridEmail:process.env.SENDGRID_EMAIL,
- SendGridTemplateId:process.env.SENDGRID_TEMPLATE_ID
+ SendGridTemplateId:process.env.SENDGRID_TEMPLATE_ID,
+ RedirectDomainDev:process.env.REDIRECT_DOMAIN_DEV,
+ RedirectDomainProd: process.env.REDIRECT_DOMAIN_PROD
 }
