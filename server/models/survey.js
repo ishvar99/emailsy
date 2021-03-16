@@ -3,7 +3,7 @@ const mongoose =require('mongoose')
 const surveySchema= new mongoose.Schema({
  user:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
  title:String,
- Subject:String,
+ subject:String,
  body:String,
  recipients:[{
   email:String,
