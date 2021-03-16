@@ -1,12 +1,14 @@
 import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import {createSurvey} from '../../redux/actions/surveyAction'
 const SurveyReview = ({surveyReview}) => {
+ const history=useHistory();
  const dispatch = useDispatch();
  const form = useSelector(state => state.form)
  const {body,recipients,subject,title}=form.SurveyForm.values;
  const sendSurvey=()=>{
-  dispatch(createSurvey(form.SurveyForm.values));
+  dispatch(createSurvey(form.SurveyForm.values,history));
  }
  return (
   <div>
