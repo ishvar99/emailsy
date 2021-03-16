@@ -24,7 +24,7 @@ const Header = () => {
   dispatch(FetchUser())
 }, [])
  return (
-    <nav>
+    <nav style={{marginBottom:'50px',paddingLeft:'10px'}}>
     <div className="nav-wrapper">
       <Link to={auth?'/surveys':'/'} className="left p-2 brand-logo">Emailsy</Link>
       <ul className="right">

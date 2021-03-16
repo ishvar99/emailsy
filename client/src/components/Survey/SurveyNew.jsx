@@ -7,7 +7,7 @@ const SurveyNew = () => {
   <div>
   {!showSurveyReview?
    <SurveyForm surveyReview={setShowSurveyReview}/>
-   :<SurveyReview/>
+   :<SurveyReview surveyReview={setShowSurveyReview}/>
   }
   </div>
  )
