@@ -4,7 +4,6 @@ const {SendGridKey} =require('../config/keys')
 sgMail.setApiKey(SendGridKey)
 const {sendEmail}= require('../services/sendEmail')
 exports.createSurvey= async(req,res)=>{
- console.log(req.body)
  const {title,body,subject,recipients}=req.body
  const survey =await Survey.create({
   title,
