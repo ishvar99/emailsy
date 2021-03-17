@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 import {FetchUser} from '../../redux/actions/authAction'
 import Payment from '../Payment/Payment'
 const Header = () => {
+  const clearCookies=()=>{
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+  }
  const auth = useSelector((state) => state.auth)
  const dispatch = useDispatch()
  const renderContent=()=>{
@@ -16,7 +19,7 @@ const Header = () => {
       return [
         <li key="1"><Payment/></li>,
         <li key="2" style={{margin:"0 10px"}}>Credits: {auth?.credits}</li>,
-      <li key="3"><a href="/api/auth/google/logout">Logout</a></li>
+      <li key="3"><a onClick={clearCookies} href="/api/auth/google/logout">Logout</a></li>
     ]
   }
  }

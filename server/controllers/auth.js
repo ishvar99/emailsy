@@ -7,10 +7,10 @@ exports.logoutUser=(req,res)=>{
  res.redirect('/')
 }
 exports.handleCallback=(req,res)=>{
-  if(process.env.NODE_ENV === "production"){
-    res.redirect(`${RedirectDomainProd}/surveys`)
-  }
-  else{
-    res.redirect(`${RedirectDomainDev}/surveys`)
-  }
+  res.redirect(
+    process.env.NODE_ENV === "production"
+      ? `${req.protocol}://${req.get(
+          "host"
+        )}/surveys`
+      : `${req.protocol}://localhost:3000/surveys`)
 }
