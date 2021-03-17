@@ -1,6 +1,7 @@
 const _ =require('lodash')
 const {Path} =require('path-parser')
 const {URL}=require('url')
+const mongoose =require('mongoose')
 const Survey = require('../models/survey')
 const sgMail = require("@sendgrid/mail")
 const {SendGridKey} =require('../config/keys')
@@ -44,7 +45,7 @@ exports.thanks=(req,res)=>{
 }
 exports.surveyWebhooks=(req,res)=>{
  const p =new Path('/api/surveys/:surveyId/:response')
- const events= _.chain(req.body)
+ _.chain(req.body)
  .map(({email,url})=>{
  const pathname= new URL(url).pathname
  const match = p.test(pathname)
@@ -52,8 +53,21 @@ exports.surveyWebhooks=(req,res)=>{
   return {email,surveyId:match.surveyId,response:match.response}
  }
  })
- .compact(events)
- .uniqBy(compactEvents,'email','surveyId');
- console.log(events)
+ .compact()
+ .uniqBy('email','surveyId')
+ .each(({email,surveyId,response})=>{
+  console.log(response)
+  Survey.updateOne({
+   _id:surveyId,
+   recipients:{
+    $elemMatch:{email,responded:false}
+   }
+  },
+  {
+   $inc: {[response]:1},
+   $set: {'recipients.$.responded':true}})
+   .exec()
+ })
+ .value()
  res.send({})
 }
