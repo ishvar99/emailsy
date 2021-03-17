@@ -1,3 +1,6 @@
+const _ =require('lodash')
+const {Path} =require('path-parser')
+const {URL}=require('url')
 const Survey = require('../models/survey')
 const sgMail = require("@sendgrid/mail")
 const {SendGridKey} =require('../config/keys')
@@ -40,6 +43,17 @@ exports.thanks=(req,res)=>{
  res.json({'msg':'Thank you for feedback!'})
 }
 exports.surveyWebhooks=(req,res)=>{
- console.log(req.body)
+ const p =new Path('/api/surveys/:surveyId/:response')
+ const events= _.chain(req.body)
+ .map(({email,url})=>{
+ const pathname= new URL(url).pathname
+ const match = p.test(pathname)
+ if(match){
+  return {email,surveyId:match.surveyId,response:match.response}
+ }
+ })
+ .compact(events)
+ .uniqBy(compactEvents,'email','surveyId');
+ console.log(events)
  res.send({})
 }
