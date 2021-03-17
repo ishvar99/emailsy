@@ -10,7 +10,7 @@ const Dashboard = () => {
    await dispatch(fetchSurveys())
     }
     getSurveys()
-  }, [])
+  }, [surveys])
  return (
    <>
    {surveys? surveys.reverse().map((survey)=>
