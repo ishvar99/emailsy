@@ -13,7 +13,7 @@ const Dashboard = () => {
   }, [])
  return (
    <>
-   {surveys? surveys.map((survey)=>
+   {surveys? surveys.reverse().map((survey)=>
    <div className="card darken-1" key={survey._id}>
           <div className="card-content">
             <span className="card-title">{survey.title}</span>

@@ -9,8 +9,8 @@ exports.logoutUser=(req,res)=>{
 exports.handleCallback=(req,res)=>{
   res.redirect(
     process.env.NODE_ENV === "production"
-      ? `${req.protocol}://${req.get(
+      ? `https://${req.get(
           "host"
         )}/surveys`
-      : `${req.protocol}://localhost:3000/surveys`)
+      : `http://localhost:3000/surveys`)
 }
