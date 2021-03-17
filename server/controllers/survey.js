@@ -15,9 +15,8 @@ exports.createSurvey= async(req,res)=>{
   title,
   body,
   subject,
-  recipients:recipients.split(",").map((email)=>({email})),
-  user:req.user.id,
-  dateSent:Date.now()
+  recipients:recipients.split(",").map((email)=>({email:email.trim()})),
+  user:req.user.id
  })
  try{
   let urlY,urlN;
@@ -37,8 +36,11 @@ exports.createSurvey= async(req,res)=>{
   return res.status(400).json({success:false,message:'Failed to send email'})
  }
 }
-exports.listSurveys=(req,res)=>{
- 
+exports.listSurveys=async (req,res)=>{
+ const surveys= await Survey.find({
+   user:req.user.id
+ }).select({recipients:false})
+ res.json(surveys)
 }
 exports.thanks=(req,res)=>{
  res.json({'msg':'Thank you for feedback!'})
@@ -61,11 +63,13 @@ exports.surveyWebhooks=(req,res)=>{
    _id:surveyId,
    recipients:{
     $elemMatch:{email,responded:false}
-   }
+   } //find query
   },
   {
    $inc: {[response]:1},
-   $set: {'recipients.$.responded':true}})
+   $set: {'recipients.$.responded':true},//$ refers to result of find query
+   lastResponded: new Date()
+  })
    .exec()
  })
  .value()

@@ -11,7 +11,10 @@ const surveySchema= new mongoose.Schema({
    type:Boolean,
    default:false
   },
-  dateSent:Date,
+  dateSent:{
+   type:Date,
+   default: Date.now
+  },
   lastResponded:Date
  }],
  yes:{
